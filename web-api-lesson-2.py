@@ -1,4 +1,5 @@
 import requests
+import argparse
 import os
 from dotenv import load_dotenv
 from urllib.parse import urlparse
@@ -58,7 +59,11 @@ def main():
     load_dotenv()
     token = os.environ['VK_TOKEN']
 
-    url = input('Введите ссылку: ')
+    parser = argparse.ArgumentParser(description="Программа может\
+        укоротить длинную ссылку или посчитать клики по короткой.")
+    parser.add_argument('url', type=str, help="Ссылка")
+    url = parser.parse_args().url
+
     key = urlparse(url).path.lstrip("/")
 
     try:
